@@ -47,7 +47,7 @@ fun LoginScreen(navController: NavController) {
 
     Box(
         Modifier
-            .padding(16.dp)
+            .padding(15.dp)
     ) {
         Login(Modifier.align(Alignment.Center), navController)
     }
