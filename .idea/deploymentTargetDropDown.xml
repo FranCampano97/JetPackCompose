@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="deploymentTargetDropDown">
+    <value>
+      <entry key="DetailsScreen">
+        <State />
+      </entry>
+      <entry key="TabScreen">
+        <State />
+      </entry>
+      <entry key="Tabs">
+        <State />
+      </entry>
+      <entry key="TextoFiltrar">
+        <State />
+      </entry>
+      <entry key="TextoSmart">
+        <State />
+      </entry>
+      <entry key="app">
+        <State />
+      </entry>
+    </value>
+  </component>
+</project>
