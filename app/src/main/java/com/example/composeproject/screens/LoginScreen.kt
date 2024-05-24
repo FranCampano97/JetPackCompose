@@ -1,7 +1,7 @@
 package com.example.composeproject.screens
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,9 +18,10 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,10 +31,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -82,11 +86,9 @@ fun RegisterButton(modifier: Modifier, navController: NavController) {
         onClick = { navController.navigate(AppScreens.RegisterScreen.route) },
         modifier = modifier
             .width(250.dp)
-            .height(40.dp)
-            .background(
-                color = Color.Green,
-                shape = MaterialTheme.shapes.medium
-            ),
+            .height(40.dp),
+        border = BorderStroke(3.dp, Color.Green),
+        shape = RoundedCornerShape(40.dp),
         colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
     ) {
         Text(text = "Registrarte", fontWeight = FontWeight.Bold, color = Color.Green)
@@ -150,36 +152,86 @@ fun ForgotPassword(navController: NavController) {
 
 @Composable
 fun PasswordField() {
-    var password by remember {
-        mutableStateOf("")
+    var password by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+    ) {
+        TextField(
+            value = password,
+            onValueChange = { password = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Center),
+            placeholder = { Text(text = "Contraseña") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            singleLine = true,
+            maxLines = 1,
+            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+            trailingIcon = {
+                val imagePainter: Painter =
+                    painterResource(id = if (passwordVisible) R.drawable.ic_ojo else R.drawable.ic_ojo)
+
+                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                    Image(
+                        painter = imagePainter,
+                        contentDescription = null
+                    )
+                }
+            },
+            textStyle = TextStyle(color = Color.Black),
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = Color.Transparent,
+                placeholderColor = Color.Gray,
+                textColor = Color.Black
+            )
+        )
+        Divider(
+            color = Color.Gray,
+            thickness = 1.dp,
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .fillMaxWidth()
+        )
     }
-    TextField(
-        value = password,
-        onValueChange = { password = it },
-        modifier = Modifier.fillMaxWidth(),
-        placeholder = { Text(text = "Password ") },
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-        singleLine = true,
-        maxLines = 1,
-        textStyle = TextStyle(color = Color.Black)
-    )
 }
 
 @Composable
 fun EmailField() {
-    var email by remember {
-        mutableStateOf("")
+    var email by remember { mutableStateOf("") }
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+    ) {
+        TextField(
+            value = email,
+            onValueChange = { email = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.Center),
+            placeholder = { Text(text = "Email") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            singleLine = true,
+            maxLines = 1,
+            textStyle = TextStyle(color = Color.Black),
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = Color.Transparent,
+                placeholderColor = Color.Gray,
+                textColor = Color.Black
+            )
+        )
+        Divider(
+            color = Color.Gray,
+            thickness = 1.dp,
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .fillMaxWidth()
+        )
     }
-    TextField(
-        value = email,
-        onValueChange = { email = it },
-        modifier = Modifier.fillMaxWidth(),
-        placeholder = { Text(text = "Email") },
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-        singleLine = true,
-        maxLines = 1,
-        textStyle = TextStyle(color = Color.Black)
-    )
 }
 
 @Composable

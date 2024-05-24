@@ -1,15 +1,15 @@
 package com.example.composeproject.screens
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -68,11 +68,9 @@ fun RegisterNewButton(modifier: Modifier) {
         onClick = { },
         modifier = modifier
             .width(250.dp)
-            .height(40.dp)
-            .background(
-                color = Color.Green,
-                shape = MaterialTheme.shapes.medium
-            ),
+            .height(40.dp),
+        border = BorderStroke(3.dp, Color.Green),
+        shape = RoundedCornerShape(40.dp),
         colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
     ) {
         Text(text = "Registrarte", fontWeight = FontWeight.Bold, color = Color.Green)
